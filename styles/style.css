@@ -44,4 +44,10 @@ body{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all .5s;
+}
+
+.flip{
+    transform: rotateY(180deg)
 }
