@@ -1,0 +1,7 @@
+@charset "UTF -8";
+
+@media (max-width: 850px){
+    .cards{
+        width: 80%;
+    }
+}

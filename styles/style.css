@@ -20,11 +20,19 @@ body{
     font-size: 3.5em;
     color: #75B79E;
     font-weight: bold;
+    text-align: center;
+    margin: 20px;
 }
 .cards{
+    padding: 10px;
     margin-top: 40px;
     display: flex;
-    width: 90%;
+    width: 70%;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 .card {
     width: 117px;
@@ -35,4 +43,5 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
