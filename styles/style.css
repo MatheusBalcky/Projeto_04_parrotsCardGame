@@ -48,6 +48,13 @@ body{
     transition: all .5s;
 }
 
+
+/* configs para o script */
 .flip{
-    transform: rotateY(180deg)
+    transform: rotateY(180deg);
+    transition: all .5s;
+}
+.hidden{
+    transition: all .5s;
+    display: none;
 }
