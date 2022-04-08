@@ -15,17 +15,17 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+    padding: 20px;
 }
 .canva-web > h1{
     font-size: 3.5em;
     color: #75B79E;
     font-weight: bold;
     text-align: center;
-    margin: 20px;
 }
 .cards{
     padding: 10px;
-    margin-top: 40px;
     display: flex;
     width: 70%;
     border: 1px solid blue;
@@ -33,6 +33,9 @@ body{
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+}
+.cards img{
+    width: 100px;
 }
 .card {
     width: 117px;
@@ -46,6 +49,18 @@ body{
     cursor: pointer;
     transform-style: preserve-3d;
     transition: all .5s;   
+}
+.buttonStart{
+    padding: 10px 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #75B79E;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.buttonStart:hover{
+    background-color: #538270;
 }
 
 

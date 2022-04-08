@@ -1,5 +1,4 @@
-programa recebe qntdade de cartas  variavel = "cards"
-verifica na condição se o valor de cartas se encaixa nas regras do jogo PARA JOGAR
-após confirmado passa para a função "addCards"
-addCards a qual exponhe na tela a qntdade de cartas
-A função add cards vai distribuir as cartas com as imagens 
+O JOGO PERGUNTA QUANTAS CARTAS DESEJA JOGAR   (ENTRADA DE DADOS!)
+APENAS CARTAS DE VALOR, ACIMA DE 3, E MENOR QUE 15, E NUMEROS PARES. É POSSÍVEL JOGAR (CONDIÇÃO!)
+COM A QUANTIDADE DE CARTAS ESTABELECIDAS DESTRIBUIR AS CARTAS 
+DESTRIBUIR CARTAS COM A IMAGEM SORTIDA "DENTRO";
