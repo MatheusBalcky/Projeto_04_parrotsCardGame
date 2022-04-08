@@ -45,14 +45,13 @@ body{
     align-items: center;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: all .5s;
+    transition: all .5s;   
 }
 
 
 /* configs para o script */
 .flip{
     transform: rotateY(180deg);
-    transition: all .5s;
 }
 .hidden{
     transition: all .5s;

@@ -1,0 +1,5 @@
+programa recebe qntdade de cartas  variavel = "cards"
+verifica na condição se o valor de cartas se encaixa nas regras do jogo PARA JOGAR
+após confirmado passa para a função "addCards"
+addCards a qual exponhe na tela a qntdade de cartas
+A função add cards vai distribuir as cartas com as imagens 
