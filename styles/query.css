@@ -1,2 +1,8 @@
 @charset "UTF -8";
 
+@media (max-width: 450px) {
+    .cards{
+        padding: 0px;
+        width: 100%;
+    }
+}
