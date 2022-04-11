@@ -74,6 +74,9 @@ function start(){
             </div>
         `
     }
+    clearInterval(watchId);
+    mins = 0;
+    seconds = 0;
     watchId = setInterval(watch, 1000);
 }
 
