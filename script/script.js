@@ -53,23 +53,34 @@ function flipCard(card){
 }
 
 let cardsSelected = [];
+let points = 0;
+let plays = 0;
 function clickCard(element){
     flipCard(element); // flipa o card
     element.removeAttribute("onclick"); // retira o click do clicado
     element.classList.toggle("pointerOff"); //desliga o pointer
-    element.classList.remove("unflipped");
+    element.classList.remove("unflipped");  // retira sua class de "unflipped"
     cardsSelected.push(element);
-    let allCards = cardsBoxDom.querySelectorAll(".card.unflipped");
-    if (cardsSelected.length === 2){
-        for (let i = 0; i < allCards.length; i++){
-            allCards[i].removeAttribute("onclick");
+    plays++;
+    let endGameTest = document.querySelector(".unflipped");
+    if (endGameTest != null ){
+        
+    }
+    if (cardsSelected.length === 2){ // verifica se 2 cartões foram clicados
+        let allCardsUnflipped = cardsBoxDom.querySelectorAll(".card.unflipped"); // seleciona todos os lementos unflipped
+        for (let i = 0; i < allCardsUnflipped.length; i++){ // remove o click de todas q estão "unflipped"
+            allCardsUnflipped[i].removeAttribute("onclick");
         }
+
         if (cardsSelected[0].innerHTML !== cardsSelected[1].innerHTML){ // se forem 2 cartas viradas e diferentes
             console.log("CARTÕES DIFERENTES VIRANDO!");
-            setTimeout(autoFlip, 1000);
+            setTimeout(autoFlip, 1000); // auto flipa as cartas e recebe suas propriedades novamente
+            
         } else if (cardsSelected[0].innerHTML === cardsSelected[1].innerHTML){
             console.log ("CARTÕES IGUAIS");
-            cardsSelected = [];
+            cardsSelected = []; // zera as cartas selecionada
+            addClickAgain(); // add o click novamente nas cartas q não tão viradas
+            points++;
         }
     }
 }
@@ -78,10 +89,17 @@ function autoFlip(){
         cardsSelected[i].classList.toggle("flip");
         cardsSelected[i].querySelector(".front").classList.toggle("hidden");
         cardsSelected[i].querySelector(".back").classList.toggle("hidden");
-        cardsSelected[i].setAttribute("onclick", "clickCard(this)");
         cardsSelected[i].classList.toggle("pointerOff");
         cardsSelected[i].classList.add("unflipped");
     }
+    addClickAgain();
     console.log("Auto flip iniciado", cardsSelected);
-    cardsSelected = [];
-} 
+    cardsSelected = []; // zera as cartas selecionada
+}
+
+function addClickAgain(){
+    let allCardsUnflipped = cardsBoxDom.querySelectorAll(".card.unflipped");
+    for (let i = 0; i < allCardsUnflipped.length; i++){ 
+        allCardsUnflipped[i].setAttribute("onclick", "clickCard(this)");
+    }
+}
