@@ -22,18 +22,12 @@ function zeroAhead (num){
     return num;
 }
 
-
-
-
-
-
-
 function comparator(){
     return Math.random() - 0.5;
 }
 // * A FUNÇÃO INICIA O JOGO PERGUNTANDO AS CARTAS LOGO APÓS, CALCULA QUANTOS TIPOS FIGURAS PAR VAI TER, EM SEGUIDA FORMA UMA ARRAY QUE VAI SERVIR COMO "PACK" DE BARALHO QUE EM SEGUIDO VAI SER EMBARALHO OS ELEMENTOS E SERÁ INSERIDO NA TELA ATRAVÉS DE OUTRO LOOP
 function start(){
-    let numbersCards = Number(prompt("Quantas cartas deseja jogar?(Min: 4 Max: 14)"));
+    let numbersCards = Number(prompt("Com quantas cartas você deseja jogar? (De 4 à 14, apenas números pares)"));
     while (numbersCards < 4 || numbersCards % 2 !== 0 || numbersCards > 14){
         alert("Número inválido digita novamente!");
         numbersCards = Number(prompt("Com quantas cartas você deseja jogar? (De 4 à 14, apenas números pares)"));
