@@ -1,32 +1,14 @@
 const parrots = ["bobrossparrot","explodyparrot","fiestaparrot","metalparrot","revertitparrot","tripletsparrot","unicornparrot"];
 let cardsBoxDom = document.querySelector(".cards");
-let typeFigures = [];
 let seconds = 0;
 let mins = 0;
 let watchId;
+let cardsSelected = [];
+let points = 0;
+let plays = 0;
 
-function watch(){
-    let watchHtml = document.querySelector(".watch");
-    seconds ++;
-    if (seconds > 59){
-        seconds = 0;
-        mins++;
-    }
-    watchHtml.innerHTML = `${zeroAhead(mins)}:${zeroAhead(seconds)}`;
-    console.log('teste');
-}
-function zeroAhead (num){
-    if (num < 10){
-        num = "0" + num;
-    }
-    return num;
-}
-
-function comparator(){
-    return Math.random() - 0.5;
-}
-// * A FUNÇÃO INICIA O JOGO PERGUNTANDO AS CARTAS LOGO APÓS, CALCULA QUANTOS TIPOS FIGURAS PAR VAI TER, EM SEGUIDA FORMA UMA ARRAY QUE VAI SERVIR COMO "PACK" DE BARALHO QUE EM SEGUIDO VAI SER EMBARALHO OS ELEMENTOS E SERÁ INSERIDO NA TELA ATRAVÉS DE OUTRO LOOP
-function start(){
+function start(){// * A FUNÇÃO INICIA O JOGO PERGUNTANDO AS CARTAS LOGO APÓS, CALCULA QUANTOS TIPOS FIGURAS PAR VAI TER, EM SEGUIDA FORMA UMA ARRAY QUE VAI SERVIR COMO "PACK" DE BARALHO QUE EM SEGUIDO VAI SER EMBARALHO OS ELEMENTOS E SERÁ INSERIDO NA TELA ATRAVÉS DE OUTRO LOOP
+    let cardsPack = [];
     let numbersCards = Number(prompt("Com quantas cartas você deseja jogar? (De 4 à 14, apenas números pares)"));
     while (numbersCards < 4 || numbersCards % 2 !== 0 || numbersCards > 14){
         alert("Número inválido digita novamente!");
@@ -37,24 +19,14 @@ function start(){
         plays = 0;
         cardsSelected = [];
         points = 0;
-        typeFigures = [];
+        cardsPack = [];
     }
     // ^ LOOP QUE DEFINI EM UMA ARRAY QNTOS TIPOS DE FIGURA VAI TER
     for(let i = 0; i < numbersCards/2; i++){             
-        typeFigures.push(parrots[i]);
+        cardsPack.push(parrots[i]);
+        cardsPack.push(parrots[i]);
     }
-    //console.log("Resultado dos tipos de figura precisa ser 2: ", typeFigures);
-
-    let cardsPack = [];
-
-    // ^ ESSE LOOP FAZ UM PACK DO BARALHO COM A QUANTIDADE DE FIGURAS ACIMA
-    for (let i = 0; i < numbersCards; i++){              
-        if (i >= typeFigures.length ){
-            i = 0;
-        }
-        if (cardsPack.length === numbersCards) break;
-        cardsPack.push(typeFigures[i]);
-    }
+    //console.log("Resultado dos tipos de figura precisa ser 2: ", typeFigures); 
     // ^ EMBARALHA AS CARTAS
     cardsPack.sort(comparator);                               
     //console.log("Resultado do baralho embaralhado ser 4: ", cardsPack);
@@ -73,18 +45,31 @@ function start(){
     seconds = 0;
     watchId = setInterval(watch, 1000);
 }
-
-// * FUNÇÃO PARA FLIPAR A CARTA
-function flipCard(card){                           
+function watch(){ // * FUNÇÃO DO RELÓGIO
+    let watchHtml = document.querySelector(".watch");
+    seconds ++;
+    if (seconds > 59){
+        seconds = 0;
+        mins++;
+    }
+    watchHtml.innerHTML = `${zeroAhead(mins)}:${zeroAhead(seconds)}`;
+    console.log('teste');
+}
+function zeroAhead (num){ // * FUNÇÃO Q PONHE O ZERO NA FRENTE DOS NUMBER NO WATCH
+    if (num < 10){
+        num = "0" + num;
+    }
+    return num;
+}
+function comparator(){ // * ACESSORIO PARA A FUNÇÃO .SORT
+    return Math.random() - 0.5;
+}
+function flipCard(card){// * FUNÇÃO PARA FLIPAR A CARTA                        
     card.classList.toggle("flip");
     card.querySelector(".front").classList.toggle("hidden");
     card.querySelector(".back").classList.toggle("hidden");
 }
-
-let cardsSelected = [];
-let points = 0;
-let plays = 0;
-function clickCard(element){
+function clickCard(element){// * AÇÃO DE CLICAR NO CARD FUNÇÃO
     flipCard(element); // flipa o card
     element.removeAttribute("onclick"); // retira o click do clicado
     element.classList.toggle("pointerOff"); //desliga o pointer
@@ -115,7 +100,7 @@ function clickCard(element){
     }
     
 }
-function autoFlip(){
+function autoFlip(){// * FUNÇÃO DO AUTOFLIP SE CARTAS FOREM !=
     for(let i = 0; i < 2; i++){
         cardsSelected[i].classList.toggle("flip");
         cardsSelected[i].querySelector(".front").classList.toggle("hidden");
@@ -127,14 +112,13 @@ function autoFlip(){
     console.log("Auto flip iniciado", cardsSelected);
     cardsSelected = []; // zera as cartas selecionada
 }
-
-function addClickAgain(){
+function addClickAgain(){ // * FUNÇÃO Q ADD OS CLICKS AGAIN APÓS JOGADA PAR
     let allCardsUnflipped = cardsBoxDom.querySelectorAll(".card.unflipped");
     for (let i = 0; i < allCardsUnflipped.length; i++){ 
         allCardsUnflipped[i].setAttribute("onclick", "clickCard(this)");
     }
 }
-function endGame (){
+function endGame (){ // * FUNÇÃO QUE FINALIZA UMA RODADA
     clearInterval(watchId);
     alert(`Você ganhou em ${plays} jogadas e no tempo de, ${zeroAhead(mins)}:${zeroAhead(seconds)}`);
     alert(`Atenção se quiser jogar novamente aperte no botão abaixo Start / Restart`);
