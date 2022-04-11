@@ -13,7 +13,13 @@ function start(){
         alert("Número inválido digita novamente!");
         numbersCards = Number(prompt("Com quantas cartas você deseja jogar? (De 4 à 14, apenas números pares)"));
     }
-
+    if (cardsBoxDom.innerHTML !== '\n        '){
+        cardsBoxDom.innerHTML = `\n        `;
+        plays = 0;
+        cardsSelected = [];
+        points = 0;
+        typeFigures = [];
+    }
     // ^ LOOP QUE DEFINI EM UMA ARRAY QNTOS TIPOS DE FIGURA VAI TER
     for(let i = 0; i < numbersCards/2; i++){             
         typeFigures.push(parrots[i]);
@@ -64,25 +70,27 @@ function clickCard(element){
     plays++;
     let endGameTest = document.querySelector(".unflipped");
     if (endGameTest != null ){
-        
-    }
-    if (cardsSelected.length === 2){ // verifica se 2 cartões foram clicados
-        let allCardsUnflipped = cardsBoxDom.querySelectorAll(".card.unflipped"); // seleciona todos os lementos unflipped
-        for (let i = 0; i < allCardsUnflipped.length; i++){ // remove o click de todas q estão "unflipped"
-            allCardsUnflipped[i].removeAttribute("onclick");
+        if (cardsSelected.length === 2){ // verifica se 2 cartões foram clicados
+            let allCardsUnflipped = cardsBoxDom.querySelectorAll(".card.unflipped"); // seleciona todos os lementos unflipped
+            for (let i = 0; i < allCardsUnflipped.length; i++){ // remove o click de todas q estão "unflipped"
+                allCardsUnflipped[i].removeAttribute("onclick");
+            }
+    
+            if (cardsSelected[0].innerHTML !== cardsSelected[1].innerHTML){ // se forem 2 cartas viradas e diferentes
+                console.log("CARTÕES DIFERENTES VIRANDO!");
+                setTimeout(autoFlip, 1000); // auto flipa as cartas e recebe suas propriedades novamente
+                
+            } else if (cardsSelected[0].innerHTML === cardsSelected[1].innerHTML){
+                console.log ("CARTÕES IGUAIS");
+                cardsSelected = []; // zera as cartas selecionada
+                addClickAgain(); // add o click novamente nas cartas q não tão viradas
+                points++;
+            }
         }
-
-        if (cardsSelected[0].innerHTML !== cardsSelected[1].innerHTML){ // se forem 2 cartas viradas e diferentes
-            console.log("CARTÕES DIFERENTES VIRANDO!");
-            setTimeout(autoFlip, 1000); // auto flipa as cartas e recebe suas propriedades novamente
-            
-        } else if (cardsSelected[0].innerHTML === cardsSelected[1].innerHTML){
-            console.log ("CARTÕES IGUAIS");
-            cardsSelected = []; // zera as cartas selecionada
-            addClickAgain(); // add o click novamente nas cartas q não tão viradas
-            points++;
-        }
+    } else {
+        setTimeout(endGame, 500);
     }
+    
 }
 function autoFlip(){
     for(let i = 0; i < 2; i++){
@@ -102,4 +110,8 @@ function addClickAgain(){
     for (let i = 0; i < allCardsUnflipped.length; i++){ 
         allCardsUnflipped[i].setAttribute("onclick", "clickCard(this)");
     }
+}
+function endGame (){
+    alert(`Você ganhou em ${plays} jogadas!`);
+    alert(`Atenção se quiser jogar novamente aperte no botão abaixo Start / Restart`)
 }
