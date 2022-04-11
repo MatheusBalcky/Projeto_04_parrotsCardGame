@@ -1,11 +1,36 @@
 const parrots = ["bobrossparrot","explodyparrot","fiestaparrot","metalparrot","revertitparrot","tripletsparrot","unicornparrot"];
 let cardsBoxDom = document.querySelector(".cards");
 let typeFigures = [];
+let seconds = 0;
+let mins = 0;
+let watchId;
+
+function watch(){
+    let watchHtml = document.querySelector(".watch");
+    seconds ++;
+    if (seconds > 59){
+        seconds = 0;
+        mins++;
+    }
+    watchHtml.innerHTML = `${zeroAhead(mins)}:${zeroAhead(seconds)}`;
+    console.log('teste');
+}
+function zeroAhead (num){
+    if (num < 10){
+        num = "0" + num;
+    }
+    return num;
+}
+
+
+
+
+
+
 
 function comparator(){
     return Math.random() - 0.5;
 }
-
 // * A FUNÇÃO INICIA O JOGO PERGUNTANDO AS CARTAS LOGO APÓS, CALCULA QUANTOS TIPOS FIGURAS PAR VAI TER, EM SEGUIDA FORMA UMA ARRAY QUE VAI SERVIR COMO "PACK" DE BARALHO QUE EM SEGUIDO VAI SER EMBARALHO OS ELEMENTOS E SERÁ INSERIDO NA TELA ATRAVÉS DE OUTRO LOOP
 function start(){
     let numbersCards = Number(prompt("Quantas cartas deseja jogar?(Min: 4 Max: 14)"));
@@ -49,6 +74,7 @@ function start(){
             </div>
         `
     }
+    watchId = setInterval(watch, 1000);
 }
 
 // * FUNÇÃO PARA FLIPAR A CARTA
@@ -112,6 +138,9 @@ function addClickAgain(){
     }
 }
 function endGame (){
-    alert(`Você ganhou em ${plays} jogadas!`);
-    alert(`Atenção se quiser jogar novamente aperte no botão abaixo Start / Restart`)
+    clearInterval(watchId);
+    alert(`Você ganhou em ${plays} jogadas e no tempo de, ${zeroAhead(mins)}:${zeroAhead(seconds)}`);
+    alert(`Atenção se quiser jogar novamente aperte no botão abaixo Start / Restart`);
+    mins = 0;
+    seconds = 0;
 }
